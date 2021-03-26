@@ -6,24 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src='jquery-3.6.0.min.js'></script>
+    <script src='bootstrap/js/bootstrap.min.js' crossorigin="anonymous"></script>
+    <link href='bootstrap/css/bootstrap.min.css' rel="stylesheet" crossorigin="anonymous"/>
     <script src='index.js'></script>
 </head>
 <body>
-    <input type="text" id="textoLimpio" maxlength=1 />
-
-    <br />
-    <br />
-    <br />
-
-    <textarea id="textoEscrito" readonly=true style="    margin: 0px;
-    width: 772px;
-    height: 398px;"></textarea>
-    <br />
-    <br />
-    <br />
-
-    <textarea id="textoCodificado" readonly=true style="    margin: 0px;
-    width: 772px;
-    height: 398px;"></textarea>
+    <!--<input type="text" id="textoLimpio" maxlength=1 />-->
+    <div class='containter'>
+        <div class="row align-items-start">
+            <div class='col'>
+                <label for='textoEscrito' class='col-12'>TEXTO NORMAL</label>
+                <textarea id="textoEscrito" readonly=true  class='col-12'></textarea>
+            </div>
+            <div class='col'>
+                <label for='textoCodificado' class='col-12'>TEXTO ZDC</label>
+                <textarea id="textoCodificado" class='col-12'></textarea>
+            </div>
+        </div>
+        <div class='clearfix'></div>
+        <div class='col'>
+            <label for='newspaper'>NEWSPAPER</label>
+            <div id="newspaper" style='width: "99%"; border:2px blue;'></div>
+        </div>
+    </div>
 </body>
+
 </html>
