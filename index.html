@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -9,22 +9,23 @@
     <script src='bootstrap/js/bootstrap.min.js' crossorigin="anonymous"></script>
     <link href='bootstrap/css/bootstrap.min.css' rel="stylesheet" crossorigin="anonymous"/>
     <script src='index.js'></script>
+    <script src='libreria.js'></script>
 </head>
 <body>
     <!--<input type="text" id="textoLimpio" maxlength=1 />-->
     <div class='containter'>
         <div class="row align-items-start">
-            <div class='col'>
+            <div class='col' style='display:none;' >
                 <label for='textoEscrito' class='col-12'>TEXTO NORMAL</label>
-                <textarea id="textoEscrito" readonly=true  class='col-12'></textarea>
+                <textarea id="textoEscrito" readonly=true class='col-12'></textarea>
             </div>
-            <div class='col'>
+            <div class='col' style='display:none;' >
                 <label for='textoCodificado' class='col-12'>TEXTO ZDC</label>
-                <textarea id="textoCodificado" class='col-12'></textarea>
+                <textarea id="textoCodificado" class='col-12' ></textarea>
             </div>
         </div>
         <div class='clearfix'></div>
-        <div class='col'>
+        <div class='col-6 offset-3'>
             <label for='newspaper'>NEWSPAPER</label>
             <div id="newspaper" style='width: "99%"; border:2px blue;'></div>
         </div>
