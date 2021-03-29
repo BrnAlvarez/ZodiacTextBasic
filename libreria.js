@@ -23,13 +23,30 @@
                         elementosEstilos[largoDeEstilos[i]] = estilos[arregloDeEstilos[i]];
                     }
                 } else if (typeof estilo === "string") {
-                    console.log("es un string");
                     debugger;
-                }
+                    estilos = estilos.replace(/\s/g, "");
+                    var separadorDeEstilos = estilos.indexOf(",") ? "," : ":",
+                        multiplesEstilos = estilos.indexOf(";");
 
+                    if (multiplesEstilos >= 0) return;
+                    if (separadorDeEstilos == "," || separadorDeEstilos == ":") {
+                        estilos = estilos.split(separadorDeEstilos);
+                        if (document.querySelector(elemento).style[estilos[0]]) {
+                            document.querySelector(elemento).style[estilos[0]] = estilos[1];
+                        } else {
+                            if (document.querySelector(elemento).style(estilos[1])) {
+                                document.querySelector(elemento).style[estilos[1]] = estilos[0];
+                            }
+                        }
+                    }
+
+                }
+                //,
+                //otras funciones
+            },
+            setMensaje: function(elemento,mensaje){
+                debugger;
             }
-            //,
-            //otras funciones
         }
         return funciones;
     }
