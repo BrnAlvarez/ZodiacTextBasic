@@ -157,7 +157,6 @@ $(function () {
             var texto = e.target.result;
             texto = texto.toUpperCase();
             texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            console.log(texto);
             // var texto = "HOLA";
             var timer = 1000;
             contieneCallback(texto, timer, function (respuesta) {
@@ -218,7 +217,8 @@ function ejecutar(keyText) {
                 Random = (Math.floor(Math.random() * 6) + 1);
             else
                 Random = '1';
-            $('#newspaper').append('<img class="rounded" style="width: 35px; height: 35px;" src="images/' + matriz[key][1] + Random + '.jpg" />');
+                //style="width: 35px; height: 35px;" 
+            $('#newspaper').append('<img class="rounded" src="images/' + matriz[key][1] + Random + '.jpg" />');
             $('html, body').animate({
                 scrollTop: $(document).height()
             }, 'slow');
