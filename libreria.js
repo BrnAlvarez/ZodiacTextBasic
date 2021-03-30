@@ -1,6 +1,6 @@
 (function (window, document) {
-    var contieneFuncion = function () {
-        var funciones = {
+    var _fx = function () {
+        var fnx = {
             setCss: function (elemento, estilos) {
                 debugger;
                 if (!elemento) return;
@@ -22,7 +22,7 @@
                     for (; i < largoDeEstilos; i++) {
                         elementosEstilos[largoDeEstilos[i]] = estilos[arregloDeEstilos[i]];
                     }
-                } else if (typeof estilo === "string") {
+                } else if (typeof estilos === "string") {
                     debugger;
                     estilos = estilos.replace(/\s/g, "");
                     var separadorDeEstilos = estilos.indexOf(",") ? "," : ":",
@@ -31,10 +31,10 @@
                     if (multiplesEstilos >= 0) return;
                     if (separadorDeEstilos == "," || separadorDeEstilos == ":") {
                         estilos = estilos.split(separadorDeEstilos);
-                        if (document.querySelector(elemento).style[estilos[0]]) {
+                        if (document.querySelector(elemento).style[estilos[0]] !== 'undefined') {
                             document.querySelector(elemento).style[estilos[0]] = estilos[1];
                         } else {
-                            if (document.querySelector(elemento).style(estilos[1])) {
+                            if (document.querySelector(elemento).style[estilos[1]] !== 'undefined') {
                                 document.querySelector(elemento).style[estilos[1]] = estilos[0];
                             }
                         }
@@ -42,74 +42,89 @@
 
                 }
                 //,
-                //otras funciones
+                //otras fnx
             },
-            escribePorMi: function (leerDesdeId, elemento, limpiar = false) {
+            write: function (leerDesdeId, elemento, limpiar = false) {
 
-                if (!leerDesdeId)
+                if (!leerDesdeId || typeof leerDesdeId === "object")
                     return;
-                if (typeof leerDesdeId === "object") {
-                    if (!leerDesdeId.elemento || !leerDesdeId.leerDesdeId)
-                        return;
-                    elemento = leerDesdeId.elemento;
-                    leerDesdeId = leerDesdeId.leerDesdeId;
-                } else if (typeof elemento === "object") {
-                    if (!elemento.elemento || !elemento.leerDesdeId)
+
+                if (!elemento || typeof elemento === "object") {
+                    if (!elemento.elemento)
                         return;
                     elemento = elemento.elemento;
-                    leerDesdeId = elemento.leerDesdeId;
                 }
-                if (!document.body.contains(document.querySelector(leerDesdeId)))
-                    return;
+                if (document.body.contains(document.querySelector(leerDesdeId))) {
 
-                if (limpiar)
-                    document.querySelector(elemento).innerHTML = '';
-                // document.querySelector(elemento).innerHTML = "Escribiendo Dinámicamente:";
-                if (document.querySelector(leerDesdeId).getAttribute('type') == 'file') {
-                    var fileInput = document.querySelector(leerDesdeId);
+                    if (limpiar)
+                        document.querySelector(elemento).innerHTML = '';
+                    // document.querySelector(elemento).innerHTML = "Escribiendo Dinámicamente:";
+                    if (document.querySelector(leerDesdeId).getAttribute('type') == 'file') {
+                        var fileInput = document.querySelector(leerDesdeId);
 
-                    //falta validar que contenga un archivo
+                        //falta validar que contenga un archivo
 
-                    var filePath = fileInput.value;
-                    var allowedExtensions = /(.txt)$/i;
-                    if (!allowedExtensions.exec(filePath)) {
-                        fileInput.value = '';
-                        return false;
-                    } else {
-                        //Image preview
-                        if (fileInput.files && fileInput.files[0]) {
+                        var filePath = fileInput.value;
+                        var allowedExtensions = /(.txt)$/i;
+                        if (!allowedExtensions.exec(filePath)) {
+                            fileInput.value = '';
+                            return false;
+                        } else {
+                            //Image preview
+                            if (fileInput.files && fileInput.files[0]) {
 
-                            var lector = new FileReader();
-                            lector.onload = function (e) {
-                                var texto = e.target.result;
-                                texto = texto.toUpperCase();
-                                //texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                                // var texto = "HOLA";
-                                var timer = 1000;
-                                contieneCallback(texto, timer, function (respuesta) {
-                                    for (var i = 0; i < respuesta.length; i++) {
-                                        var keyText = respuesta.substr(i, 1);
-                                        var numberOfLineBreaks = (keyText.match(/\n/g) || []).length;
-                                        if (keyText == " ")
-                                            timer = timer + 150;
-                                        else if (numberOfLineBreaks >= 1)
-                                            timer = timer + 200;
-                                        else
-                                            timer = timer + 100;
-                                        contieneCallback(keyText, timer, function (respuesta2) {
-                                            ejecutar(elemento, respuesta2);
-                                        });
-                                    }
-                                });
+                                var lector = new FileReader();
+                                lector.onload = function (e) {
+                                    var texto = e.target.result;
+                                    texto = texto.toUpperCase();
+                                    //texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                                    // var texto = "HOLA";
+                                    var timer = 1000;
+                                    contieneCallback(texto, timer, function (respuesta) {
+                                        for (var i = 0; i < respuesta.length; i++) {
+                                            var keyText = respuesta.substr(i, 1);
+                                            var numberOfLineBreaks = (keyText.match(/\n/g) || []).length;
+                                            if (keyText == " ")
+                                                timer = timer + 150;
+                                            else if (numberOfLineBreaks >= 1)
+                                                timer = timer + 200;
+                                            else
+                                                timer = timer + 100;
+                                            contieneCallback(keyText, timer, function (respuesta2) {
+                                                ejecutar(elemento, respuesta2);
+                                            });
+                                        }
+                                    });
 
 
+                                }
+                                lector.readAsText(fileInput.files[0]);
+                                //reader.readAsDataURL(fileInput.files[0]);
                             }
-                            lector.readAsText(fileInput.files[0]);
-                            //reader.readAsDataURL(fileInput.files[0]);
                         }
+                    } else {
+                        var texto = document.querySelector(leerDesdeId).value;
+                        texto = texto.toUpperCase();
+                        //texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                        var timer = 1000;
+                        contieneCallback(texto, timer, function (respuesta) {
+                            for (var i = 0; i < respuesta.length; i++) {
+                                var keyText = respuesta.substr(i, 1);
+                                var numberOfLineBreaks = (keyText.match(/\n/g) || []).length;
+                                if (keyText == " ")
+                                    timer = timer + 150;
+                                else if (numberOfLineBreaks >= 1)
+                                    timer = timer + 200;
+                                else
+                                    timer = timer + 100;
+                                contieneCallback(keyText, timer, function (respuesta2) {
+                                    ejecutar(elemento, respuesta2);
+                                });
+                            }
+                        });
                     }
                 } else {
-                    var texto = document.querySelector(leerDesdeId).value;
+                    var texto = leerDesdeId;
                     texto = texto.toUpperCase();
                     //texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     var timer = 1000;
@@ -132,11 +147,11 @@
 
             }
         }
-        return funciones;
+        return fnx;
     }
     //Validamos que nuestra función se haya declarado, sino la declaramos para usarla desde cualquier parte del proyecto.
-    if (typeof window.contieneFuncion === "undefined") {
-        window.contieneFuncion = contieneFuncion();
+    if (typeof window._fx === "undefined") {
+        window._fx = _fx();
     }
 })(window, document);
 

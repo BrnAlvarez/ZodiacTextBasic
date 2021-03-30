@@ -25,7 +25,7 @@
 
 <body>
     <!--<input type="text" id="textoLimpio" maxlength=1 />-->
-    <div class='containter'>
+    <div class='container'>
         <div class="row align-items-start">
             <div class='col' /*style='display:none;' * />
             <label for='textoEscrito' class='col-12'>TEXTO NORMAL</label>
@@ -59,16 +59,14 @@
             function2
             , false);
         function function1(e) {
-            contieneFuncion.escribePorMi({
+            _fx.write('#file-input', {
                 limpiar: true,
-                leerDesdeId: '#file-input',
                 elemento: '#newspaper'
             });
         }
-        function function2(e){
-            contieneFuncion.escribePorMi({
+        function function2(e) {
+            _fx.write('#textoEscrito', {
                 limpiar: true,
-                leerDesdeId: '#textoEscrito',
                 elemento: '#newspaper'
             });
         }
