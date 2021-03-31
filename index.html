@@ -9,68 +9,31 @@
     <script src='jquery-3.6.0.min.js'></script>
     <script src='bootstrap/js/bootstrap.min.js' crossorigin="anonymous"></script>
     <link href='bootstrap/css/bootstrap.min.css' rel="stylesheet" crossorigin="anonymous" />
-    <style>
-        input[type="file"] {
-            display: none;
-        }
-
-        .custom-file-upload {
-            border: 1px solid #ccc;
-            display: inline-block;
-            padding: 6px 12px;
-            cursor: pointer;
-        }
-    </style>
+    
 </head>
 
 <body>
-    <!--<input type="text" id="textoLimpio" maxlength=1 />-->
     <div class='container'>
         <div class="row align-items-start">
-            <div class='col' /*style='display:none;' * />
+            <div class='col' style='display:none;'>
             <label for='textoEscrito' class='col-12'>TEXTO NORMAL</label>
-            <textarea id="textoEscrito" /*readonly=true*/ class='col-12'></textarea>
+            <textarea id="textoEscrito" readonly=true class='col-12'></textarea>
         </div>
-        <div class='col' style='display:none;'>
+        <div class='col' >
             <label for='textoCodificado' class='col-12'>TEXTO ZDC</label>
             <textarea id="textoCodificado" class='col-12'></textarea>
         </div>
     </div>
     <div class='clearfix'></div>
-    <div class='col'>
-        <label for="file-input" class="custom-file-upload">
-            Cargar
-        </label>
-        <input id="file-input" type="file" />
-    </div>
+    
 
     <div class='col-10 offset-1'>
         <label for='newspaper' id="Titutlo"></label>
         <div id="newspaper" style='width: "99%"; border:2px blue;'></div>
     </div>
     </div>
-    <!-- <script src='index.js'></script> -->
-    <script src='libreria.js'></script>
-    <script>
-        document.querySelector('#file-input').addEventListener('change',
-            function1
-            , false);
-        document.querySelector('#textoEscrito').addEventListener('blur',
-            function2
-            , false);
-        function function1(e) {
-            _fx.write('#file-input', {
-                limpiar: true,
-                elemento: '#newspaper'
-            });
-        }
-        function function2(e) {
-            _fx.write('#textoEscrito', {
-                limpiar: true,
-                elemento: '#newspaper'
-            });
-        }
-    </script>
+    <script src='index.js'></script>
+   
 </body>
 
 </html>
